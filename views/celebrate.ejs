@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ✨</title>
+    <style>
+        /* Base Styling */
+        body { 
+            margin: 0; 
+            background-color: #fce7f3; 
+            overflow: hidden; 
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Continuous Ambient Particle Layer */
+        #bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Letter Box Container (Hidden Initially) */
+        .letter-box {
+            position: relative;
+            z-index: 10;
+            background: #fffdf9; /* Soft parchment paper color */
+            width: 85%;
+            max-width: 500px;
+            min-height: 250px;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid #fbcfe8;
+            
+            /* Hidden by default, handles the scale-up pop when active */
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1), transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Decorative envelope line style inside the letter */
+        .letter-box::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px dashed #f472b6;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .letter-box.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Typewriter text space */
+        #text-content {
+            font-size: 1.35rem;
+            line-height: 1.6;
+            color: #4c0519;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        /* The Next Step Button inside the letter */
+        .next-btn {
+            background-color: #db2777;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            align-self: center;
+            box-shadow: 0 4px 10px rgba(219, 39, 119, 0.3);
+            transition: all 0.3s ease;
+            
+            /* Hidden until typewriter finishes */
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .next-btn.reveal {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .next-btn:hover {
+            background-color: #be185d;
+            transform: translateY(-2px);
+        }
+
+        /* Particle Floating & Twinkling Animation */
+        @keyframes floatAndTwinkle {
+            0% {
+                transform: translateY(105vh) scale(0.6);
+                opacity: 0;
+            }
+            15% { opacity: 0.8; }
+            50% { opacity: 0.2; } /* Creates structural blinking effect */
+            85% { opacity: 0.8; }
+            100% {
+                transform: translateY(-95vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-container"></div>
+
+    <div class="letter-box" id="secret-letter">
+        <div id="text-content"></div>
+        <a href="/birthday" class="next-btn" id="action-button">Click Here ✨</a>
+    </div>
+
+    <script>
+        const bgContainer = document.getElementById('bg-container');
+        const letter = document.getElementById('secret-letter');
+        const textElement = document.getElementById('text-content');
+        const actionBtn = document.getElementById('action-button');
+
+        const elementsPool = ['🎈', '❤️', '💖', '✨', '⭐', '💕'];
+        
+        // 1. Particle Spawner Engine
+        function spawnParticle() {
+            const el = document.createElement('div');
+            el.style.position = 'absolute';
+            el.style.bottom = '-5vh';
+            el.innerText = elementsPool[Math.floor(Math.random() * elementsPool.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 1.6 + 1.2) + 'rem';
+            
+            el.style.animation = 'floatAndTwinkle linear forwards';
+            const duration = Math.random() * 3 + 4; // Floating speed (4s to 7s)
+            el.style.animationDuration = duration + 's';
+            
+            bgContainer.appendChild(el);
+            setTimeout(() => { el.remove(); }, duration * 1000);
+        }
+
+        // Start spawning particles immediately
+        const particleInterval = setInterval(spawnParticle, 150);
+
+        // 2. Typewriter Message Setup
+        const messageString = "To the girl with the most beautiful smile... Happy Birthday! 🎂 Today is all about celebrating you and the wonderful person you are. Thank you for being my favorite part of every day. There is a little more waiting for you... click below ✨";
+        const wordsArray = messageString.split(' ');
+        let wordIdx = 0;
+
+        function typeWords() {
+            if (wordIdx < wordsArray.length) {
+                textElement.innerHTML += wordsArray[wordIdx] + ' ';
+                wordIdx++;
+                setTimeout(typeWords, 300); // 300ms speed per word typing rate
+            } else {
+                // Show the click button smoothly when typing completes
+                actionBtn.classList.add('reveal');
+            }
+        }
+
+        // 3. Main Sequence Timing Control
+        setTimeout(() => {
+            // Drop back the intensity of particle spawner slightly so text is readable
+            clearInterval(particleInterval);
+            setInterval(spawnParticle, 400); 
+
+            // Make the letter page pop open smoothly
+            letter.classList.add('show');
+
+            // Begin typing words inside the box after it handles its entry scaling
+            setTimeout(typeWords, 1000);
+
+        }, 1000); // Exact 5 second visual intro delay before letter arrives
+    </script>
+</body>
+</html>+

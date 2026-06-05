@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Beautiful! 🎂</title>
+    <style>
+        /* Base Setup */
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to bottom, #fff1f2, #ffe4e6);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient floating elements background */
+        #celebration-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Main Container */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 600px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Top Header Styling */
+        .birthday-header {
+            font-size: 3rem;
+            color: #db2777;
+            margin: 0 0 5px 0;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            animation: bounceTitle 2s infinite ease-in-out;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #be185d;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Her Special Image Frame */
+        .her-photo-container {
+            width: 280px;
+            background: white;
+            padding: 15px 15px 20px 15px;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transform: rotate(2deg);
+            animation: photoSway 4s infinite ease-in-out;
+            margin-bottom: 35px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo-wrapper {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .her-photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Elegant Name Text Box under Photo */
+        .her-name-tag {
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #db2777;
+            font-weight: bold;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* YouTube Video Panel Frame styling */
+        .video-panel {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 16 / 9;
+            margin-bottom: 35px;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(219, 39, 119, 0.12);
+            border: 1px solid rgba(251, 207, 232, 0.6);
+        }
+
+        .video-panel iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 6px;
+        }
+
+        /* Birthday Wishes Box */
+        .wishes-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(251, 207, 232, 0.6);
+            box-shadow: 0 10px 25px rgba(219, 39, 119, 0.08);
+            color: #4c0519;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .wishes-card p {
+            margin: 0 0 15px 0;
+        }
+
+        .wishes-card p:last-child {
+            margin-bottom: 0;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: #db2777;
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes bounceTitle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes photoSway {
+            0%, 100% { transform: rotate(2deg); }
+            50% { transform: rotate(-2deg); }
+        }
+
+        @keyframes driftUp {
+            0% {
+                transform: translateY(105vh) scale(0.6);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(-15vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="celebration-bg"></div>
+
+    <div class="main-content">
+        <h1 class="birthday-header">Happy Birthday! 🎉</h1>
+        <div class="subtitle">❤️ My Whole World ❤️</div>
+
+        <!-- Polaroid Style Container with Name Text Area Below Image -->
+        <div class="her-photo-container">
+            <div class="photo-wrapper">
+                <img src="https://res.cloudinary.com/dkd2ekmmf/image/upload/v1780626174/Gemini_Generated_Image_eh4jubeh4jubeh4j_cob62h.png" alt="The Birthday Girl">
+            </div>
+            <!-- TYPE HER NAME RIGHT HERE -->
+            <div class="her-name-tag">Vanshika ✨</div>
+        </div>
+
+        <!-- Dynamic YouTube Player Anchor -->
+        <div class="video-panel">
+            <div id="player"></div>
+        </div>
+
+        <div class="wishes-card">
+            <p>On this beautiful day, I want to celebrate the most gorgeous, kind, and wonderful person I know—you.</p>
+            <p>Thank you for bringing so much color, warmth, and laughter into my life. Every moment spent with you is a memory I treasure deeply.</p>
+            <p>May your day be filled with as much happiness, sweetness, and magic as you give to me every single day.</p>
+            <p>Have the most amazing day, cutie! I love you so much! 🎂✨🎈</p>
+            <p>Yours Rishabh......</p>
+        </div>
+    </div>
+
+    <!-- Asynchronous YouTube Player API Layer -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        // 1. Synchronized Player Settings for 'OYf9NlA8AeU'
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '315',
+                width: '560',
+                videoId: 'OYf9NlA8AeU',
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 1,
+                    'rel': 0,
+                    'loop': 1,
+                    'start': 15, // Preserves your customized 15-second skip offset
+                    'playlist': 'OYf9NlA8AeU' 
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.unmute();
+            event.target.playVideo();
+        }
+
+        // 2. Background Ambiance Particle Loops
+        const bgContainer = document.getElementById('celebration-bg');
+        const elements = ['🎈', '❤️', '💖', '✨', '🎂', '💕', '⭐'];
+
+        function spawnCelebrationItem() {
+            const item = document.createElement('div');
+            item.style.position = 'absolute';
+            item.style.bottom = '-10vh';
+            
+            item.innerText = elements[Math.floor(Math.random() * elements.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.fontSize = (Math.random() * 1.5 + 1.2) + 'rem';
+            
+            item.style.animation = 'driftUp linear forwards';
+            const duration = Math.random() * 4 + 5; 
+            item.style.animationDuration = duration + 's';
+            
+            bgContainer.appendChild(item);
+            setTimeout(() => { item.remove(); }, duration * 1000);
+        }
+
+        setInterval(spawnCelebrationItem, 300);
+        for(let i=0; i<15; i++) {
+            setTimeout(spawnCelebrationItem, Math.random() * 2000);
+        }
+    </script>
+</body>
+</html>

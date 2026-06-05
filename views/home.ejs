@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Cutie! ✨</title>
+    <style>
+        /* Base Page Setup */
+        body { 
+            font-family: 'Georgia', serif; 
+            background-color: #fff1f2; 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Ambient Animation Layer */
+        #bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Central Welcome Card with Scale Animation */
+        .welcome-card { 
+            text-align: center; 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(8px);
+            padding: 50px 40px; 
+            border-radius: 24px; 
+            box-shadow: 0 15px 35px rgba(219, 39, 119, 0.15); 
+            z-index: 10;
+            max-width: 85%;
+            width: 420px;
+            border: 1px solid rgba(251, 207, 232, 0.5);
+            
+            /* Custom scale pop animation with a sweet elastic bounce */
+            animation: cardPopIn 8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        h1 { 
+            color: #db2777; 
+            font-size: 2.2em; 
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        p { 
+            color: #4b5563; 
+            font-size: 1.1em;
+            margin-bottom: 35px; 
+            line-height: 1.5;
+        }
+
+        /* Elegant Pulse Call-to-Action Button */
+        .btn { 
+            background-color: #db2777; 
+            color: white; 
+            border: none; 
+            padding: 16px 40px; 
+            font-size: 1.2em; 
+            font-weight: bold;
+            border-radius: 50px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(219, 39, 119, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover { 
+            background-color: #be185d; 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(190, 24, 93, 0.5);
+        }
+
+        /* --- Keyframes --- */
+        @keyframes cardPopIn {
+            0% { 
+                opacity: 0; 
+                transform: scale(0); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+
+        @keyframes floatUpAndBlink {
+            0% {
+                transform: translateY(0) scale(0.7);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.2; /* Twinkle/Blink effect */
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-120vh) scale(1.1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-container"></div>
+
+    <div class="welcome-card">
+        <h1>Hey cutie! 💖</h1>
+        <p>There is something incredibly special waiting for you...</p>
+        <a href="/celebrate" class="btn">Click Here ✨</a>
+    </div>
+
+    <script>
+        const container = document.getElementById('bg-container');
+        const elements = ['🎈', '❤️', '💖', '✨', '💕'];
+
+        // Helper function to build an individual floating element
+        function createItem(startAtBottom = true) {
+            const item = document.createElement('div');
+            item.style.position = 'absolute';
+            
+            // If startAtBottom is false, scatter it across the viewport height immediately
+            if (startAtBottom) {
+                item.style.bottom = '-10vh';
+            } else {
+                item.style.bottom = Math.random() * 100 + 'vh';
+            }
+            
+            item.innerText = elements[Math.floor(Math.random() * elements.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.fontSize = (Math.random() * 1.5 + 1.2) + 'rem';
+            
+            item.style.animation = 'floatUpAndBlink linear forwards';
+            
+            // Give them slightly faster/different speed rates for natural movement
+            const duration = Math.random() * 4 + 6; // 6s to 10s
+            item.style.animationDuration = duration + 's';
+            
+            container.appendChild(item);
+
+            // Calculate exact lifespan for dynamic removal
+            const lifeTime = startAtBottom ? (duration * 1000) : ((duration * (parseFloat(item.style.bottom) / 100)) * 1000);
+            
+            setTimeout(() => {
+                item.remove();
+            }, duration * 1000);
+        }
+
+        function initBackgroundEffects() {
+            // 1. IMMEDIATE RENDER: Pre-populate 25 items across the full screen space right away
+            for (let i = 0; i < 25; i++) {
+                createItem(false);
+            }
+
+            // 2. LIFETIME ENGINE: Keep spawning new elements from the bottom line over time
+            setInterval(() => {
+                createItem(true);
+            }, 350);
+        }
+
+        // Initialize setup loops
+        initBackgroundEffects();
+    </script>
+</body>
+</html>
