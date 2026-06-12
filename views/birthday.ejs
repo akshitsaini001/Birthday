@@ -1,261 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Beautiful! 🎂</title>
-    <style>
-        /* Base Setup */
-        body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(to bottom, #fff1f2, #ffe4e6);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAPPY 6th BIRTHDAY! 🎂</title>
+  <style>
+    /* Base Setup */
+    body {
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      background: linear-gradient(to bottom, #eff6ff, #dbeafe);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        /* Ambient floating elements background */
-        #celebration-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            pointer-events: none;
-        }
+    #celebration-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+    }
 
-        /* Main Container */
-        .main-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 600px;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    /* Main Container - Adjusted padding for cleaner spacing */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 1000px;
+      /* Widened to fit 3 photos beautifully side-by-side */
+      width: 100%;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+    }
 
-        /* Top Header Styling */
-        .birthday-header {
-            font-size: 3rem;
-            color: #db2777;
-            margin: 0 0 5px 0;
-            font-style: italic;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
-            animation: bounceTitle 2s infinite ease-in-out;
-        }
+    .birthday-header {
+      font-size: 3.5rem;
+      color: #e11d48;
+      /* Bright Punchy Crimson */
+      margin: 0;
+      text-shadow: 3px 3px 0px #ffffff, 5px 5px 0px #2563eb;
+      animation: bounceTitle 1.5s infinite ease-in-out;
+      letter-spacing: 1px;
+    }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: #be185d;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+    /* Responsive Title Scale for Smaller Screens */
+    @media (max-width: 480px) {
+      .birthday-header {
+        font-size: 2.3rem;
+      }
 
-        /* Her Special Image Frame */
-        .her-photo-container {
-            width: 280px;
-            background: white;
-            padding: 15px 15px 20px 15px;
-            border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            transform: rotate(2deg);
-            animation: photoSway 4s infinite ease-in-out;
-            margin-bottom: 35px;
-            background-color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+      .subtitle {
+        font-size: 1.1rem;
+      }
+    }
 
-        .photo-wrapper {
-            width: 100%;
-            height: 350px;
-            overflow: hidden;
-            border-radius: 2px;
-        }
+    .subtitle {
+      font-size: 1.5rem;
+      color: #2563eb;
+      margin: 10px 0 35px 0;
+      font-weight: bold;
+      background: #facc15;
+      padding: 5px 20px;
+      border-radius: 10px;
+      box-shadow: 4px 4px 0px #1e3a8a;
+    }
 
-        .her-photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    /* NEW: Responsive Photo Grid Section */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      /* 1 column on mobile */
+      gap: 30px;
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 40px;
+      padding: 10px;
+      box-sizing: border-box;
+      justify-items: center;
+    }
 
-        /* Elegant Name Text Box under Photo */
-        .her-name-tag {
-            font-family: 'Georgia', serif;
-            font-style: italic;
-            font-size: 1.4rem;
-            color: #db2777;
-            font-weight: bold;
-            margin-top: 15px;
-            letter-spacing: 1px;
-        }
+    /* 3 Columns on Tablets and Desktop Screens */
+    @media (min-width: 768px) {
+      .photo-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
 
-        /* YouTube Video Panel Frame styling */
-        .video-panel {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 16 / 9;
-            margin-bottom: 35px;
-            background: white;
-            padding: 10px;
-            border-radius: 12px;
-            box-shadow: 0 15px 30px rgba(219, 39, 119, 0.12);
-            border: 1px solid rgba(251, 207, 232, 0.6);
-        }
+    /* Comic Book / Action Card Portrait Frame */
+    .photo-card-container {
+      width: 100%;
+      max-width: 270px;
+      /* Constrained for perfect grid sizing */
+      background: #ffffff;
+      padding: 15px 15px 20px 15px;
+      border-radius: 20px;
+      box-shadow: 0 12px 0px #bfdbfe, 0 20px 30px rgba(0, 0, 0, 0.12);
+      border: 5px solid #2563eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      transition: transform 0.3s ease;
+    }
 
-        .video-panel iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 6px;
-        }
+    /* Staggered comic rotation for the 3 frames */
+    .card-1 {
+      transform: rotate(-3deg);
+      animation: photoSwayLeft 4.5s infinite ease-in-out;
+    }
 
-        /* Birthday Wishes Box */
-        .wishes-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(5px);
-            padding: 35px;
-            border-radius: 20px;
-            border: 1px solid rgba(251, 207, 232, 0.6);
-            box-shadow: 0 10px 25px rgba(219, 39, 119, 0.08);
-            color: #4c0519;
-            line-height: 1.8;
-            font-size: 1.2rem;
-            text-align: center;
-        }
+    .card-2 {
+      transform: rotate(2deg);
+      animation: photoSwayRight 5s infinite ease-in-out;
+    }
 
-        .wishes-card p {
-            margin: 0 0 15px 0;
-        }
+    .card-3 {
+      transform: rotate(-1deg);
+      animation: photoSwayLeft 5.5s infinite ease-in-out;
+    }
 
-        .wishes-card p:last-child {
-            margin-bottom: 0;
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: #db2777;
-        }
+    .photo-card-container:hover {
+      transform: scale(1.05) rotate(0deg) !important;
+      z-index: 20;
+    }
 
-        /* --- Keyframe Animations --- */
-        @keyframes bounceTitle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
+    .photo-wrapper {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: #e2e8f0;
+    }
 
-        @keyframes photoSway {
-            0%, 100% { transform: rotate(2deg); }
-            50% { transform: rotate(-2deg); }
-        }
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        @keyframes driftUp {
-            0% {
-                transform: translateY(105vh) scale(0.6);
-                opacity: 0;
-            }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% {
-                transform: translateY(-15vh) scale(1.2);
-                opacity: 0;
-            }
-        }
-    </style>
+    .her-name-tag {
+      font-size: 1.6rem;
+      color: #dc2626;
+      font-weight: bold;
+      margin-top: 15px;
+      text-shadow: 1px 1px 0px #fff;
+      white-space: nowrap;
+    }
+
+    /* Video Panel Setup */
+    .video-panel {
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 16 / 9;
+      margin-bottom: 35px;
+      background: white;
+      padding: 10px;
+      border-radius: 20px;
+      border: 4px solid #facc15;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+    }
+
+    .video-panel iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+    }
+
+    /* Power Wishes Box */
+    .wishes-card {
+      background: #ffffff;
+      padding: 35px;
+      border-radius: 25px;
+      border: 4px solid #2563eb;
+      box-shadow: 0 15px 0px #bfdbfe;
+      color: #1e3a8a;
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      font-size: 1.3rem;
+      font-weight: bold;
+      max-width: 600px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .wishes-card p {
+      margin: 0 0 15px 0;
+    }
+
+    .wishes-card p:last-child {
+      margin-bottom: 0;
+      font-size: 1.6rem;
+      color: #dc2626;
+    }
+
+    /* --- Keyframe Animations --- */
+    @keyframes bounceTitle {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-10px) scale(1.03);
+      }
+    }
+
+    @keyframes photoSwayLeft {
+
+      0%,
+      100% {
+        transform: rotate(-3deg);
+      }
+
+      50% {
+        transform: rotate(1deg) translateY(-4px);
+      }
+    }
+
+    @keyframes photoSwayRight {
+
+      0%,
+      100% {
+        transform: rotate(3deg);
+      }
+
+      50% {
+        transform: rotate(-1deg) translateY(-4px);
+      }
+    }
+
+    @keyframes driftUp {
+      0% {
+        transform: translateY(105vh) scale(0.6);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-15vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div id="celebration-bg"></div>
+  <div id="celebration-bg"></div>
 
-    <div class="main-content">
-        <h1 class="birthday-header">Happy Birthday! 🎉</h1>
-        <div class="subtitle">❤️ My Whole World ❤️</div>
+  <div class="main-content">
+    <h1 class="birthday-header">HAPPY 6th BIRTHDAY! 🎉</h1>
+    <div class="subtitle">⭐ OUR LITTLE SUPERHERO ⭐</div>
 
-        <!-- Polaroid Style Container with Name Text Area Below Image -->
-        <div class="her-photo-container">
-            <div class="photo-wrapper">
-                <img src="https://res.cloudinary.com/dkd2ekmmf/image/upload/v1780629133/jjsj_aq3etg.jpg" alt="The Birthday Girl">
-            </div>
-            <!-- TYPE HER NAME RIGHT HERE -->
-            <div class="her-name-tag">Vanshika ✨</div>
+    <!-- NEW: 3 Photo Grid Container -->
+    <div class="photo-grid">
+
+      <!-- PHOTO FRAME 1 -->
+      <div class="photo-card-container card-1">
+        <div class="photo-wrapper">
+          <!-- Replace with your first photo URL -->
+          <img src="https://res.cloudinary.com/dkd2ekmmf/image/upload/v1781283626/v2_bj7iw9.jpg" alt="Birthday Boy 1">
         </div>
+        <div class="her-name-tag">SUPER VIHAAN ⚡</div>
+      </div>
 
-        <!-- Dynamic YouTube Player Anchor -->
-        <div class="video-panel">
-            <div id="player"></div>
+      <!-- PHOTO FRAME 2 -->
+      <div class="photo-card-container card-2">
+        <div class="photo-wrapper">
+          <!-- Replace with your second photo URL -->
+          <img src="https://res.cloudinary.com/dkd2ekmmf/image/upload/v1781283627/v3_vmcihv.jpg" alt="Birthday Boy 2">
         </div>
+        <div class="her-name-tag">CHAMPION ⭐</div>
+      </div>
 
-        <div class="wishes-card">
-            <p>On this beautiful day, I want to celebrate the most gorgeous, kind, and wonderful person I know—you.</p>
-            <p>Thank you for bringing so much color, warmth, and laughter into my life. Every moment spent with you is a memory I treasure deeply.</p>
-            <p>May your day be filled with as much happiness, sweetness, and magic as you give to me every single day.</p>
-            <p>Have the most amazing day, cutie! I love you so much! 🎂✨🎈</p>
-            <p>Yours Rishabh......</p>
+      <!-- PHOTO FRAME 3 -->
+      <div class="photo-card-container card-3">
+        <div class="photo-wrapper">
+          <!-- Replace with your third photo URL -->
+          <img src="https://res.cloudinary.com/dkd2ekmmf/image/upload/v1781283626/v1_hwiauh.jpg" alt="Birthday Boy 3">
         </div>
+        <div class="her-name-tag">HERO VIHAAN 🚀</div>
+      </div>
+
     </div>
 
-    <!-- Asynchronous YouTube Player API Layer -->
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <!-- Video Player -->
+    <div class="video-panel">
+      <div id="player"></div>
+    </div>
 
-    <script>
-        // 1. Synchronized Player Settings for 'OYf9NlA8AeU'
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '315',
-                width: '560',
-                videoId: 'OYf9NlA8AeU',
-                playerVars: {
-                    'autoplay': 1,
-                    'controls': 1,
-                    'rel': 0,
-                    'loop': 1,
-                    'start': 15, // Preserves your customized 15-second skip offset
-                    'playlist': 'OYf9NlA8AeU' 
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
+    <!-- Wishes Board -->
+    <div class="wishes-card">
+      <p>Happy Birthday Vihaan Saini.</p>
+      <p>Have the most epic day ever! Your Big Brother loves you! 🎂🚗🎮⚡</p>
+    </div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    let player;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '315',
+        width: '560',
+        videoId: 'zFVPuO7Gtqo',
+        playerVars: {
+          'autoplay': 1,
+          'controls': 1,
+          'rel': 0,
+          'loop': 1,
+          'start': 11, // Starts at your custom 11-second mark
+          'playlist': 'zFVPuO7Gtqo'
+        },
+        events: {
+          'onReady': onPlayerReady
         }
+      });
+    }
 
-        function onPlayerReady(event) {
-            event.target.unmute();
-            event.target.playVideo();
-        }
+    function onPlayerReady(event) {
+      // Tells the browser to unmute the track and start processing playback
+      event.target.unmute();
+      event.target.playVideo();
+    }
 
-        // 2. Background Ambiance Particle Loops
-        const bgContainer = document.getElementById('celebration-bg');
-        const elements = ['🎈', '❤️', '💖', '✨', '🎂', '💕', '⭐'];
+    // Background Ambiance Falling / Drifting Loops
+    const bgContainer = document.getElementById('celebration-bg');
+    const elements = ['🎈', '⚡', '🚀', '⭐', '🎂', 'Rex', '🚗'];
 
-        function spawnCelebrationItem() {
-            const item = document.createElement('div');
-            item.style.position = 'absolute';
-            item.style.bottom = '-10vh';
-            
-            item.innerText = elements[Math.floor(Math.random() * elements.length)];
-            item.style.left = Math.random() * 100 + 'vw';
-            item.style.fontSize = (Math.random() * 1.5 + 1.2) + 'rem';
-            
-            item.style.animation = 'driftUp linear forwards';
-            const duration = Math.random() * 4 + 5; 
-            item.style.animationDuration = duration + 's';
-            
-            bgContainer.appendChild(item);
-            setTimeout(() => { item.remove(); }, duration * 1000);
-        }
+    function spawnCelebrationItem() {
+      const item = document.createElement('div');
+      item.style.position = 'absolute';
+      item.style.bottom = '-10vh';
+      item.innerText = elements[Math.floor(Math.random() * elements.length)];
+      item.style.left = Math.random() * 100 + 'vw';
+      item.style.fontSize = (Math.random() * 1.5 + 1.2) + 'rem';
+      item.style.animation = 'driftUp linear forwards';
+      const duration = Math.random() * 3 + 4;
+      item.style.animationDuration = duration + 's';
+      bgContainer.appendChild(item);
+      setTimeout(() => {
+        item.remove();
+      }, duration * 1000);
+    }
 
-        setInterval(spawnCelebrationItem, 300);
-        for(let i=0; i<15; i++) {
-            setTimeout(spawnCelebrationItem, Math.random() * 2000);
-        }
-    </script>
+    setInterval(spawnCelebrationItem, 250);
+    for (let i = 0; i < 15; i++) {
+      setTimeout(spawnCelebrationItem, Math.random() * 2000);
+    }
+  </script>
 </body>
+
 </html>
